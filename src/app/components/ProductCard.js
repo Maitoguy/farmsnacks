@@ -1,7 +1,20 @@
+"use client"
+
 import Image from 'next/image';
 import { Plus, Minus } from 'lucide-react';
+import { useState } from "react";
 
 export default function ProductCard({ product }) {
+
+    const [count , setCount] = useState(0);
+
+    const operation = (action) => {
+        if(action === 'add'){
+            setCount(count + 1);
+        }else if(action === 'remove'){
+            setCount(Math.max(0 , count-1))
+        }
+    }
 
     return (
         <div className="bg-surface-container-lowest border border-outline-variant rounded-lg flex flex-col shadow-sm hover:shadow-hard transition-all duration-300 overflow-hidden group">
@@ -13,8 +26,8 @@ export default function ProductCard({ product }) {
                     alt={product.product_name}
                     fill
                     className="object-contain p-4 drop-shadow-sm group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     loading="eager"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
                 <div className="absolute top-4 left-4 bg-primary-container text-on-primary-container px-3 py-1 rounded-full font-bold text-xs z-10 shadow-sm">
                     {product.quantity}
@@ -36,13 +49,17 @@ export default function ProductCard({ product }) {
                         ${product.price}
                     </span>
                     <div className="flex items-center bg-surface-container border border-outline-variant rounded-md">
-                        <button className="p-2 text-primary hover:bg-primary hover:text-on-primary hover:cursor-pointer transition-colors rounded-l-md">
+                        <button
+                            onClick={() => operation('remove')}
+                            className="p-2 text-primary hover:bg-primary hover:text-on-primary hover:cursor-pointer transition-colors rounded-l-md">
                             <Minus size={18} strokeWidth={2.5} />
                         </button>
                         <span className="w-8 text-center font-bold text-on-surface text-sm">
-                            1
+                            {count}
                         </span>
-                        <button className="p-2 text-primary hover:bg-primary hover:text-on-primary hover:cursor-pointer transition-colors rounded-r-md">
+                        <button
+                            onClick={() => operation('add')}
+                            className="p-2 text-primary hover:bg-primary hover:text-on-primary hover:cursor-pointer transition-colors rounded-r-md">
                             <Plus size={18} strokeWidth={2.5} />
                         </button>
                     </div>
