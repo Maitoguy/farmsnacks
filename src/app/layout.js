@@ -12,7 +12,7 @@ const workSans = Work_Sans({
   variable: "--font-work-sans"
 })
 
-export default function RootLayout({Children}){
+export default function RootLayout({children}){
 
   return (
       <html lang="en">
@@ -20,7 +20,7 @@ export default function RootLayout({Children}){
           <Navbar />
 
           <main>
-            {Children}
+            {children}
           </main>
 
         </body>
