@@ -1,6 +1,7 @@
 import { products } from "../../public/data";
 import ProductCard from "./components/ProductCard";
 import { Filter } from "lucide-react";
+import {DroppingFruit} from "./components/DroppingFruit";
 
 export default function Home() {
 
@@ -104,6 +105,8 @@ export default function Home() {
                     </a>
                 </div>
             </footer>
+
+            <DroppingFruit />
 
         </main>
     );

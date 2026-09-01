@@ -3,22 +3,25 @@
 import Image from 'next/image';
 import { Plus, Minus } from 'lucide-react';
 import { useState } from "react";
+import { useCartStore } from "@/store/userCart";
 
 export default function ProductCard({ product }) {
+    const [count, setCount] = useState(0);
 
-    const [count , setCount] = useState(0);
+    // Bring in the store action
+    const addToCart = useCartStore((state) => state.addToCart);
 
     const operation = (action) => {
         if(action === 'add'){
             setCount(count + 1);
-        }else if(action === 'remove'){
-            setCount(Math.max(0 , count-1))
+            addToCart(product, product.svg_icon);
+        } else if(action === 'remove'){
+            setCount(Math.max(0, count - 1));
         }
     }
 
     return (
         <div className="bg-surface-container-lowest border border-outline-variant rounded-lg flex flex-col shadow-sm hover:shadow-hard transition-all duration-300 overflow-hidden group">
-
             {/* Image Container */}
             <div className="relative w-full aspect-square bg-surface-container/50 border-b border-outline-variant overflow-hidden">
                 <Image
@@ -46,7 +49,7 @@ export default function ProductCard({ product }) {
 
                 <div className="flex justify-between items-center mt-auto pt-4 border-t border-surface-dim">
                     <span className="font-bold text-on-surface text-lg">
-                        ${product.price}
+                        ${product.price.toFixed(2)}
                     </span>
                     <div className="flex items-center bg-surface-container border border-outline-variant rounded-md">
                         <button
@@ -65,7 +68,6 @@ export default function ProductCard({ product }) {
                     </div>
                 </div>
             </div>
-
         </div>
     )
 }
