@@ -1,11 +1,19 @@
 "use client"
 
 import { motion, AnimatePresence } from "framer-motion";
-import { useCartStore } from "../../store/userCart"; // Adjust path if needed
+import { useCartStore } from "@/store/userCart"; // Adjust path if needed
+import { useState, useEffect } from "react";
 
 export function DroppingFruit() {
-    // Get Data from Zustand
     const fallingFruits = useCartStore((state) => state.fallingFruits);
+    const toggleCheckout = useCartStore((state) => state.toggleCheckout);
+    const cartItems = useCartStore((state) => state.cartItems);
+
+    // Hydration safety for the badge
+    const [isMounted, setIsMounted] = useState(false);
+    useEffect(() => { setIsMounted(true); }, []);
+
+    const totalItems = isMounted ? cartItems.reduce((total, item) => total + item.count, 0) : 0;
 
     return (
         <div className="fixed inset-0 z-50 pointer-events-none">
@@ -15,7 +23,18 @@ export function DroppingFruit() {
                 ))}
             </AnimatePresence>
 
-            <div className="absolute bottom-6 right-6 z-10 text-7xl">🧺</div>
+            {/* Clickable Basket with pointer-events-auto */}
+            <button
+                onClick={toggleCheckout}
+                className="absolute bottom-6 right-8 z-10 text-7xl hover:scale-105 transition-transform cursor-pointer pointer-events-auto"
+            >
+                🧺
+                {totalItems > 0 && (
+                    <span className="absolute -top-2 -right-2 bg-primary text-on-primary text-lg rounded-full w-10 h-10 flex items-center justify-center font-bold shadow-hard">
+                        {totalItems}
+                    </span>
+                )}
+            </button>
         </div>
     )
 }
