@@ -139,7 +139,7 @@ export default function Checkout() {
                                 <button
                                     disabled={populatedCart.length === 0}
                                     onClick={handleProceedToCheckout}
-                                    className="flex-1 bg-primary text-on-primary font-bold py-4 rounded-md shadow-hard hover:bg-surface-tint transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                                    className="hover:cursor-pointer flex-1 bg-primary text-on-primary font-bold py-4 rounded-md shadow-hard hover:bg-surface-tint transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                                 >
                                     <CreditCard size={20} />
                                     Checkout
