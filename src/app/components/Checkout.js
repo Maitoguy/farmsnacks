@@ -5,11 +5,13 @@ import { useCartStore } from "@/store/userCart";
 import { useEffect, useState } from "react";
 import { products } from "../../../public/data"; // Adjust path if needed
 import { ShieldCheck, ShoppingCart, ArrowLeft, CreditCard, Receipt, X, Plus, Minus } from 'lucide-react';
+import {useRouter} from 'next/navigation';
 
 export default function Checkout() {
     const isCheckoutOpen = useCartStore((state) => state.isCheckoutOpen);
     const toggleCheckout = useCartStore((state) => state.toggleCheckout);
     const cartItems = useCartStore((state) => state.cartItems);
+    const router = useRouter();
 
     // Store Actions for quantity
     const addToCart = useCartStore((state) => state.addToCart);
@@ -38,10 +40,15 @@ export default function Checkout() {
 
     const totalPrice = populatedCart.reduce((total, item) => total + (item.price * item.count), 0);
 
+    const handleProceedToCheckout = () => {
+        toggleCheckout();
+        router.push("/checkout");
+    }
+
     return (
         <AnimatePresence>
             {isCheckoutOpen && (
-                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6">
+                <div className="fixed inset-0 z-100 flex items-center justify-center p-4 sm:p-6">
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
@@ -67,7 +74,7 @@ export default function Checkout() {
                             </button>
                         </div>
 
-                        <div className="flex-grow overflow-y-auto p-6 flex flex-col gap-4 bg-background">
+                        <div className="grow overflow-y-auto p-6 flex flex-col gap-4 bg-background">
                             {populatedCart.length === 0 ? (
                                 <div className="text-center py-12 text-on-surface-variant flex flex-col items-center">
                                     <ShoppingCart size={48} className="mb-4 text-outline-variant" />
@@ -77,7 +84,7 @@ export default function Checkout() {
                                 populatedCart.map((item) => (
                                     <div key={item.id} className="flex justify-between items-center bg-surface-container p-4 rounded-lg border border-outline-variant/50">
                                         <div className="flex items-center gap-4">
-                                            <div className="w-16 h-16 bg-surface-container-lowest rounded-md flex-shrink-0 p-2 overflow-hidden border border-outline-variant">
+                                            <div className="w-16 h-16 bg-surface-container-lowest rounded-md shrink-0 p-2 overflow-hidden border border-outline-variant">
                                                 <img src={item.image} alt={item.product_name} className="w-full h-full object-cover" />
                                             </div>
                                             <div>
@@ -131,7 +138,8 @@ export default function Checkout() {
                                 </button>
                                 <button
                                     disabled={populatedCart.length === 0}
-                                    className="flex-1 bg-primary text-on-primary font-bold py-4 rounded-md shadow-hard hover:bg-surface-tint transition-colors disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
+                                    onClick={handleProceedToCheckout}
+                                    className="flex-1 bg-primary text-on-primary font-bold py-4 rounded-md shadow-hard hover:bg-surface-tint transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                                 >
                                     <CreditCard size={20} />
                                     Checkout
