@@ -30,6 +30,7 @@ export async function POST(req) {
 
         return NextResponse.json({ orderId: order.id, amount: amountInPaise });
     } catch (error) {
+        console.log("Error is " , error);
         return NextResponse.json({ error: 'Failed to create order' }, { status: 500 });
     }
 }
