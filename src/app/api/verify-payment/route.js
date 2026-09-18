@@ -42,6 +42,7 @@ export async function POST(req) {
 
         return NextResponse.json({ success: true, message: 'Order placed successfully' });
     } catch (error) {
+        console.error("🚨 RAZORPAY CRASH DETECTED:", error);
         return NextResponse.json({ error: 'Failed to process order' }, { status: 500 });
     }
 }
