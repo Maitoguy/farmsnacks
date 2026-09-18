@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import Razorpay from 'razorpay';
-import { products } from '../../../../public/data'; 
+import { products } from '@/public/data';
 
 export async function POST(req) {
     try {
