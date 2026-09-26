@@ -49,7 +49,7 @@ export default function CheckoutPage() {
 
     // Main Payment Handler
     const handlePayment = async (e) => {
-        e.preventDefault(); // Prevents the page from refreshing
+        e.preventDefault(); 
 
         const res = await loadRazorpayScript();
         if (!res) {

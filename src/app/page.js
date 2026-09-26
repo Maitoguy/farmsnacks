@@ -3,6 +3,7 @@ import ProductCard from "./components/ProductCard";
 import { Filter } from "lucide-react";
 import {DroppingFruit} from "./components/DroppingFruit";
 import Checkout from "./components/Checkout";
+import FlowingText from "./components/FlowingText";
 
 export default function Home() {
 
@@ -74,8 +75,11 @@ export default function Home() {
                 </div>
             </section>
 
+            {/* S */}
+            <FlowingText />
+
             {/* Main Products */}
-            <section className="bg-surface p-6 md:p-8 flex-grow z-10">
+            <section className="bg-surface p-6 md:p-8 grow z-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                     {products.map((product) => (
                         <ProductCard key={product.id} product={product}/>
