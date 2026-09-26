@@ -4,6 +4,7 @@ import { Filter } from "lucide-react";
 import {DroppingFruit} from "./components/DroppingFruit";
 import Checkout from "./components/Checkout";
 import FlowingText from "./components/FlowingText";
+import HeroCarousel from "./components/Carousel";
 
 export default function Home() {
 
@@ -77,6 +78,7 @@ export default function Home() {
 
             {/* S */}
             <FlowingText />
+            <HeroCarousel />
 
             {/* Main Products */}
             <section className="bg-surface p-6 md:p-8 grow z-10">
