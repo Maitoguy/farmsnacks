@@ -8,6 +8,7 @@ import { ShieldCheck, ShoppingCart, ArrowLeft, CreditCard, Receipt, X, Plus, Min
 import {useRouter} from 'next/navigation';
 
 export default function Checkout() {
+    
     const isCheckoutOpen = useCartStore((state) => state.isCheckoutOpen);
     const toggleCheckout = useCartStore((state) => state.toggleCheckout);
     const cartItems = useCartStore((state) => state.cartItems);

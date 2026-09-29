@@ -27,7 +27,7 @@ export default function FlowingText() {
         className="flex w-max"
         animate={{ x: ["0%", "-50%"] }}
         transition={{
-          duration: 800,        
+          duration: 1000,        
           ease: "linear",     
           repeat: Infinity,
         }}

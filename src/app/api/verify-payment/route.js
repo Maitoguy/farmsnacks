@@ -65,7 +65,7 @@ export async function POST(req) {
         // 4. Save to Firestore 'orders' collection
         const docRef = await addDoc(collection(db, 'orders'), orderRecord);
         console.log("✅ Order saved to Firestore with ID:", docRef.id);
-
+        
         return NextResponse.json({ 
             success: true, 
             orderId: docRef.id,
