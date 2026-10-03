@@ -3,12 +3,14 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useCartStore } from "@/store/userCart";
 import { useEffect, useState } from "react";
-import { products } from "../../../public/data"; // Adjust path if needed
+import { products } from "../../../public/data"; 
 import { ShieldCheck, ShoppingCart, ArrowLeft, CreditCard, Receipt, X, Plus, Minus } from 'lucide-react';
 import {useRouter} from 'next/navigation';
+import Image from 'next/image';
 
 export default function Checkout() {
-    
+
+    const basePath = "/product-image";
     const isCheckoutOpen = useCartStore((state) => state.isCheckoutOpen);
     const toggleCheckout = useCartStore((state) => state.toggleCheckout);
     const cartItems = useCartStore((state) => state.cartItems);
@@ -36,8 +38,13 @@ export default function Checkout() {
     // Look up the full product details based on the saved IDs
     const populatedCart = cartItems.map((cartItem) => {
         const fullProduct = products.find((p) => p.id === cartItem.id);
-        return { ...fullProduct, count: cartItem.count };
-    }).filter(item => item.id);
+        if (!fullProduct) return null;
+        return {
+            ...fullProduct,
+            image: Array.isArray(fullProduct.image) ? fullProduct.image[0] : fullProduct.image,
+            count: cartItem.count,
+        };
+    }).filter(Boolean);
 
     const totalPrice = populatedCart.reduce((total, item) => total + (item.price * item.count), 0);
 
@@ -85,18 +92,24 @@ export default function Checkout() {
                                 populatedCart.map((item) => (
                                     <div key={item.id} className="flex justify-between items-center bg-surface-container p-4 rounded-lg border border-outline-variant/50">
                                         <div className="flex items-center gap-4">
-                                            <div className="w-16 h-16 bg-surface-container-lowest rounded-md shrink-0 p-2 overflow-hidden border border-outline-variant">
-                                                <img src={item.image} alt={item.product_name} className="w-full h-full object-cover" />
+                                            <div className="relative w-16 h-16 shrink-0 bg-surface-container-lowest rounded-md overflow-hidden border border-outline-variant">
+                                                <Image
+                                                    src={`${basePath}${item.image}`}
+                                                    alt={item.product_name}
+                                                    fill
+                                                    sizes="64px"
+                                                    className="object-contain p-1"
+                                                />
                                             </div>
                                             <div>
                                                 <h4 className="font-bold text-on-surface">{item.product_name}</h4>
-                                                <p className="text-sm text-on-surface-variant">@ ${item.price.toFixed(2)} / ea</p>
+                                                <p className="text-sm text-on-surface-variant">@ ₹{item.price.toFixed(2)} / ea</p>
                                             </div>
                                         </div>
 
                                         <div className="flex flex-col items-end gap-2">
                                             <div className="font-bold text-primary text-lg">
-                                                ${(item.price * item.count).toFixed(2)}
+                                                ₹{(item.price * item.count).toFixed(2)}
                                             </div>
                                             <div className="flex items-center bg-surface-container-lowest border border-outline-variant rounded-md shadow-sm">
                                                 <button
@@ -127,7 +140,7 @@ export default function Checkout() {
                                     <Receipt size={24} className="text-on-surface-variant" />
                                     Total:
                                 </span>
-                                <span className="text-2xl text-primary">${totalPrice.toFixed(2)}</span>
+                                <span className="text-2xl text-primary">₹{totalPrice.toFixed(2)}</span>
                             </div>
                             <div className="flex gap-4">
                                 <button

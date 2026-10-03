@@ -76,7 +76,7 @@ export default function HeroCarousel() {
           {carouselImages.map((src, index) => (
             <div
               key={index}
-              className="flex-[0_0_100%] min-w-0 relative aspect-[4/3] sm:aspect-video lg:aspect-[21/9]"
+              className="flex-[0_0_100%] min-w-0 relative aspect-4/3 sm:aspect-video lg:aspect-21/9"
             >
               <Image
                 src={src}

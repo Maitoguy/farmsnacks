@@ -69,7 +69,11 @@ export default function ProductCard({ product }) {
                         }}
                         className="absolute inset-0"
                     >
-                        <Image src={`${basePath}${product.image[currentIndex]}`} alt={product.product_name} fill className="object-contain p-4" />
+                        <Image src={`${basePath}${product.image[currentIndex]}`} 
+                            alt={product.product_name} 
+                            fill 
+                            className="object-contain p-4" 
+                        />
                     </motion.div>
                 </AnimatePresence>
 
