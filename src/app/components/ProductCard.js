@@ -96,7 +96,7 @@ export default function ProductCard({ product }) {
 
                 <div className="flex justify-between items-center mt-auto pt-4 border-t border-surface-dim">
                     <span className="font-bold text-on-surface text-lg">
-                        ${product.price.toFixed(2)}
+                        ₹{product.price.toFixed(2)}
                     </span>
 
                     <div className="flex items-center bg-surface-container border border-outline-variant rounded-md">

@@ -24,10 +24,8 @@ export default function HeroCarousel() {
     ]
   );
 
-  
   const [selectedIndex, setSelectedIndex] = useState(0);
 
- 
   const onSelect = useCallback(() => {
     if (!emblaApi) return;
     setSelectedIndex(emblaApi.selectedScrollSnap());
@@ -45,7 +43,6 @@ export default function HeroCarousel() {
     };
   }, [emblaApi, onSelect]);
 
- 
   const scrollPrev = useCallback(() => {
     if (!emblaApi) return;
     emblaApi.scrollPrev();
@@ -68,7 +65,7 @@ export default function HeroCarousel() {
   );
 
   return (
-    <div className="relative group w-full max-w-6xl mx-auto my-6">
+    <div className="relative group w-full max-w-[1600px] px-2 md:px-6 lg:px-10 mx-auto my-6">
       {/* Embla Viewport */}
       <div
         className="overflow-hidden rounded-xl border border-outline-variant shadow-hard"
@@ -79,14 +76,14 @@ export default function HeroCarousel() {
           {carouselImages.map((src, index) => (
             <div
               key={index}
-              className="flex-[0_0_100%] min-w-0 relative h-64 md:h-96"
+              className="flex-[0_0_100%] min-w-0 relative aspect-[4/3] sm:aspect-video lg:aspect-[21/9]"
             >
               <Image
                 src={src}
                 alt={`Farm Snacks Banner ${index + 1}`}
                 fill
                 priority={index === 0}
-                className="object-cover"
+                className="object-cover md:object-contain bg-gray-50"
               />
             </div>
           ))}
@@ -97,7 +94,7 @@ export default function HeroCarousel() {
       <button
         onClick={scrollPrev}
         aria-label="Previous slide"
-        className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-black font-bold shadow-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer"
+        className="absolute left-6 md:left-12 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-black font-bold shadow-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer z-10"
       >
         &#10094;
       </button>
@@ -106,13 +103,13 @@ export default function HeroCarousel() {
       <button
         onClick={scrollNext}
         aria-label="Next slide"
-        className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-black font-bold shadow-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer"
+        className="absolute right-6 md:right-12 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-white/80 hover:bg-white text-black font-bold shadow-md flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 cursor-pointer z-10"
       >
         &#10095;
       </button>
 
       {/* Clickable Pagination Dots */}
-      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/30 backdrop-blur-sm">
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-2 px-3 py-1.5 rounded-full bg-black/30 backdrop-blur-sm z-10">
         {carouselImages.map((_, index) => {
           const isActive = index === selectedIndex;
           return (
