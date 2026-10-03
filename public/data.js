@@ -5,7 +5,7 @@ export const products = [
     "description_card": "Crunchy, earthy beetroot slices naturally sweetened by the sun.",
     "price": 4.99,
     "quantity": "150g",
-    "image": ["/beet-burst/beet-burst-1.jpg" , "/beet-burst/beet-burst-2.jpg"],
+    "image": ["/beet-burst/beet-burst-1.jpg" , "/beet-burst/beet-burst-2.jpg" , "/beet-burst/beet-burst-3.jpg"],
     "Nutrition": {
       "Calories": "210 kcal",
       "Carbohydrates": "45g",
@@ -23,7 +23,7 @@ export const products = [
     "description_card": "Crispy, lightly spiced whole okra pods for a savory, guilt-free crunch.",
     "price": 3.49,
     "quantity": "120g",
-    "image": ["/bhindi-master/bhindi-master-1.jpg" , "/bhindi-master/bhindi-master-2.jpg"],
+    "image": ["/bhindi-master/bhindi-master-1.jpg" , "/bhindi-master/bhindi-master-2.jpg" , "/bhindi-master/bhindi-master-3.jpg"],
     "Nutrition": {
       "Calories": "180 kcal",
       "Carbohydrates": "20g",
@@ -41,7 +41,7 @@ export const products = [
     "description_card": "A vibrant medley of sun-dried berries, tropical mangoes, and chewy bananas.",
     "price": 5.50,
     "quantity": "200g",
-    "image": ["/fruit-fusion/fruit-fusion-1.jpg" , "/fruit-fusion/fruit-fusion-2.jpg"],
+    "image": ["/fruit-fusion/fruit-fusion-1.jpg" , "/fruit-fusion/fruit-fusion-2.jpg" , "/fruit-fusion/fruit-fusion-3.jpg"],
     "Nutrition": {
       "Calories": "310 kcal",
       "Carbohydrates": "78g",
@@ -124,5 +124,41 @@ export const products = [
     },
     "description_detail": "Refresh and recharge with our Pine Powerdrink. Made with real pineapple extract and essential vitamins, this revitalizing powder mix dissolves instantly to deliver a crisp, hydrating, and naturally sweet energy boost without the midday crash.",
     "svg_icon": "<svg viewBox=\"0 0 24 24\" fill=\"#FDE047\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M6 8h12l-2 14H8L6 8z\" fill=\"#60A5FA\" opacity=\"0.8\"/><path d=\"M13 10l-3 5h2l-1 4 4-6h-2l2-3z\" fill=\"#FACC15\"/><path d=\"M8 4V2h8v2\" stroke=\"#94A3B8\" stroke-width=\"2\" fill=\"none\"/></svg>"
+  },
+  {
+    "id": 108,
+    "product_name": "Amla Zing",
+    "description_card": "Tangy, vitamin-C packed amla powder to nourish, detox, and energize your day.",
+    "price": 5.49,
+    "quantity": "5g",
+    "image": ["/amla-zing/amla-zing-1.png"],
+    "Nutrition": {
+      "Calories": "45 kcal",
+      "Carbohydrates": "10g",
+      "Protein": "1g",
+      "Fat": "0g",
+      "Fiber": "3g",
+      "Sugar": "2g"
+    },
+    "description_detail": "A burst of citrusy goodness in every sip. Amla Zing is crafted from shade-dried Indian gooseberries, retaining their natural vitamin C and antioxidants. This tangy blend is your daily ritual for immunity, detox, and sustained energy — no artificial flavors, just pure amla power.",
+    "svg_icon": "<svg viewBox=\"0 0 24 24\" fill=\"#65A30D\" xmlns=\"http://www.w3.org/2000/svg\"><circle cx=\"12\" cy=\"14\" r=\"7\" fill=\"#84CC16\"/><path d=\"M12 7c-1-3-3-5-3-5s2 1 3 3c1-2 3-3 3-3s-2 2-3 5\" fill=\"#16A34A\"/><path d=\"M12 3v5\" stroke=\"#15803D\" stroke-width=\"1.5\"/><circle cx=\"9\" cy=\"12\" r=\"0.8\" fill=\"#365314\"/><circle cx=\"15\" cy=\"14\" r=\"0.8\" fill=\"#365314\"/><circle cx=\"12\" cy=\"17\" r=\"0.8\" fill=\"#365314\"/></svg>"
+  },
+  {
+    "id": 109,
+    "product_name": "Beet Buzz",
+    "description_card": "Earthy, iron-rich beetroot blend to support heart health and boost stamina.",
+    "price": 5.99,
+    "quantity": "5g",
+    "image": ["/beet-buzz/beet-buzz-1.png"],
+    "Nutrition": {
+      "Calories": "60 kcal",
+      "Carbohydrates": "13g",
+      "Protein": "2g",
+      "Fat": "0g",
+      "Fiber": "4g",
+      "Sugar": "8g"
+    },
+    "description_detail": "Fuel your body with the deep, earthy richness of premium beetroot. Beet Buzz is slowly dehydrated to preserve its vibrant crimson color and natural nitrates, delivering a concentrated blend that supports heart health, improves stamina, and gently detoxifies. Pure roots, pure buzz — no artificial anything.",
+    "svg_icon": "<svg viewBox=\"0 0 24 24\" fill=\"#BE185D\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 6C7.5 6 4 9.5 4 14c0 4.5 4 8 8 8s8-3.5 8-8c0-4.5-3.5-8-8-8z\" fill=\"#9F1239\"/><path d=\"M12 6C10 2 6 2 6 2s2 2 3 4M12 6c2-4 6-4 6-4s-2 2-3 4\" stroke=\"#16A34A\" stroke-width=\"2\" fill=\"none\"/><path d=\"M9 13c0 3 1 5 3 6M15 13c0 3-1 5-3 6\" stroke=\"#FBCFE8\" stroke-width=\"1.2\" fill=\"none\"/></svg>"
   }
 ];
