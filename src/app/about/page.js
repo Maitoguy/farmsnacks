@@ -59,7 +59,7 @@ export default function About() {
         
         <div className="relative z-10 w-full md:w-1/2 flex justify-center items-center mt-12 md:mt-0">
           <Image 
-            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC9sYo3PHHvT9189q5MmHPURfZsfgu0a88rwCYDPTXT1v3fSIhbCDtA-GFuyXkk4JN7JKs3pevcHAlFl40ZlO4GwQynh5Y4Tt06Z9g5tmr5C8tjBqGfRsSGOQbLnNQ0DHBAky-qIakyE2PBcz-Cus-xWppoG2-DB7-ZqozugAdG2D2zmGcxWEd2lI94Uk9aMwXWZu-WLjWWORmgWAhkjFZ8WeCjX2C-LMV7rksdcG7-IxHP_12MnsGLaoN0c4OIVXPEdA"
+            src="/brand-logo.jpg"
             alt="Farm Snacks logo"
             width={400}
             height={400}
@@ -108,14 +108,18 @@ export default function About() {
             viewport={{ once: true, margin: "-100px" }}
           >
             <div className="bg-surface-container rounded-2xl border-4 border-inverse-surface shadow-[8px_8px_0px_0px_#362f2c] overflow-hidden relative aspect-video group">
-              <iframe 
-                className="absolute top-0 left-0 w-full h-full"
-                src="https://www.youtube.com/embed/LXb3EKWsInQ?si=Wp3Xk4Q7XpZ8Xw2B&controls=0&rel=0&modestbranding=1" 
-                title="FarmSnaks YouTube Video" 
-                frameBorder="0" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                allowFullScreen>
-              </iframe>
+             <video 
+                className="absolute top-0 left-0 w-full h-full object-cover rounded-md"
+                controls 
+                preload="none"
+                poster="https://res.cloudinary.com/uxe7zg48/video/upload/v1791118918/about-us.mp4"
+              >
+                <source 
+                  src="https://res.cloudinary.com/uxe7zg48/video/upload/v1791118918/about-us.mp4" 
+                  type="video/mp4" 
+                />
+                <p>Your browser does not support HTML5 video.</p>
+            </video>
             </div>
           </motion.div>
 
