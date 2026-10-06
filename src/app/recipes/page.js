@@ -24,11 +24,11 @@ const ShortCard = ({ short }) => {
   };
 
   return (
-    <div className="snap-start shrink-0 w-[280px] sm:w-[320px] flex flex-col gap-3 group">
+    <div className="snap-start shrink-0 w-70 sm:w-[320px] flex flex-col gap-3 group">
       
       {/* Video Area */}
       <div 
-        className="relative rounded-xl overflow-hidden aspect-[9/16] shadow-[4px_4px_0px_0px_#1A1A1A] hover:-translate-y-1 transition-all duration-300 cursor-pointer bg-inverse-surface"
+        className="relative rounded-xl overflow-hidden aspect-9/16 shadow-[4px_4px_0px_0px_#1A1A1A] hover:-translate-y-1 transition-all duration-300 cursor-pointer bg-inverse-surface"
         onClick={togglePlay}
       >
         {/* Render HTML5 Video instead of Next.js Image */}
@@ -41,7 +41,7 @@ const ShortCard = ({ short }) => {
         />
         
         {/* Dark Gradient Overlay for text readability */}
-        <div className="absolute inset-0 bg-gradient-to-t from-deep-forest/60 via-transparent to-transparent pointer-events-none"></div>
+        <div className="absolute inset-0 bg-linear-to-t from-deep-forest/60 via-transparent to-transparent pointer-events-none"></div>
         
         {/* Play Button Overlay (Hides when video is playing) */}
         {!isPlaying && (
@@ -105,7 +105,7 @@ export default function RecipesPage() {
   };
 
   return (
-    <main className="flex-grow flex flex-col items-center pt-8 pb-16 px-4 md:px-16 gap-12 max-w-[1280px] mx-auto w-full">
+    <main className="grow flex flex-col items-center pt-8 pb-16 px-4 md:px-16 gap-12 max-w-7xl mx-auto w-full">
       <div className="flex flex-col w-full gap-16">
         
         {/* --- HERO SECTION --- */}
@@ -119,7 +119,7 @@ export default function RecipesPage() {
           
           <div className="relative max-w-4xl mx-auto flex flex-col items-center">
             <h1 className="text-5xl md:text-6xl font-bold text-on-background tracking-tight">
-              Crunch in the <span className="text-primary italic relative inline-block">Kitchen
+              Crunch in the <span className="text-primary relative inline-block">Kitchen
                 <svg className="absolute -bottom-2 left-0 w-full h-3 text-secondary-container -z-10" preserveAspectRatio="none" viewBox="0 0 100 12">
                   <path d="M0,8 Q50,0 100,8" fill="none" stroke="currentColor" strokeLinecap="round" strokeWidth="8"></path>
                 </svg>

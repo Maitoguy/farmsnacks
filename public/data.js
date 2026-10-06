@@ -89,23 +89,27 @@ export const products = [
     "description_detail": "Sourced from the finest 'Miracle Trees,' our premium Moringa Powder is shade-dried to lock in its vibrant green color and potent vitamins. With a mild, earthy flavor, it’s the perfect superfood addition to your smoothies, teas, and morning juices.",
     "svg_icon": "<svg viewBox=\"0 0 24 24\" fill=\"#15803D\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 22V6M12 14c-4-2-6 0-6 0s1-3 6-2M12 10c4-2 6 0 6 0s-1-3-6-2\" stroke=\"#16A34A\" stroke-width=\"2\" fill=\"none\"/><path d=\"M12 4C9 1 7 4 7 4s2 3 5 3 5-3 5-3-2-3-5-3z\"/></svg>"
   },
-  {
+    {
     "id": 106,
-    "product_name": "Pine Paradise",
-    "description_card": "Chewy, golden pineapple rings bursting with pure tropical sunshine.",
+    "product_name": "Roasted Makhana",
+    "description_card": "Light, crunchy roasted fox nuts with a mild nutty flavor—an airy, guilt-free snack.",
     "price": 6.49,
     "quantity": "150g",
-    "image": ["/pine-paradise/pine-paradise-1.jpg" , "/pine-paradise/pine-paradise-2.jpg"],
+    "image": [
+      "/roasted-makhana/roasted-makhana-1.png",
+      "/roasted-makhana/roasted-makhana-2.png",
+      "/roasted-makhana/roasted-makhana-3.png"
+    ],
     "Nutrition": {
-      "Calories": "290 kcal",
-      "Carbohydrates": "75g",
-      "Protein": "2g",
-      "Fat": "0g",
-      "Fiber": "6g",
-      "Sugar": "60g"
+      "Calories": "347 kcal",
+      "Carbohydrates": "76.9g",
+      "Protein": "9.7g",
+      "Fat": "0.1g",
+      "Fiber": "14.5g",
+      "Sugar": "0g"
     },
-    "description_detail": "A tropical escape in every bite. Our Pine Paradise features thick, soft-dried pineapple rings that balance intense, concentrated sweetness with a bright, tangy finish. No added sugars, just the natural glow of perfectly ripened pineapples.",
-    "svg_icon": "<svg viewBox=\"0 0 24 24\" fill=\"#FACC15\" xmlns=\"http://www.w3.org/2000/svg\"><rect x=\"7\" y=\"10\" width=\"10\" height=\"12\" rx=\"4\"/><path d=\"M12 10L9 4l3 2 3-2-3 6z\" fill=\"#22C55E\"/><path d=\"M9 13l6 6M15 13l-6 6\" stroke=\"#CA8A04\" stroke-width=\"1.5\"/></svg>"
+    "description_detail": "Roasted makhana, also known as fox nuts or lotus seeds, is a light and crunchy snack with a mild, nutty flavor. Each bite is airy, crisp, and satisfying—perfect for guilt-free munching anytime. Enjoy it straight from the pack or lightly seasoned for an extra kick.",
+    "svg_icon": "<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M4 13h16l-1.6 6.4A2 2 0 0 1 16.46 21H7.54a2 2 0 0 1-1.94-1.6L4 13Z' fill='#D97706'/><circle cx='8' cy='10' r='3' fill='#FEF3C7'/><circle cx='12' cy='8' r='3.2' fill='#FFFBEB'/><circle cx='16' cy='10' r='3' fill='#FDE68A'/><circle cx='10' cy='11.5' r='1.8' fill='#F59E0B' opacity='.35'/><circle cx='14' cy='11.5' r='1.8' fill='#F59E0B' opacity='.35'/></svg>"
   },
   {
     "id": 107,

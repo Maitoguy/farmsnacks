@@ -36,7 +36,7 @@ export default function About() {
           </div>
           <h1 className="text-5xl md:text-6xl font-bold text-inverse-surface leading-tight">
             Farm<br />
-            <span className="text-primary italic">Snacks.</span>
+            <span className="text-primary">Snacks.</span>
           </h1>
           <p className="text-lg text-on-surface-variant max-w-md">
             Experience the pure joy of real fruit, naturally freeze-dried to preserve all the flavor and none of the guilt. Bold, crunchy, and unapologetically delicious.

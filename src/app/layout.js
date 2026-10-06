@@ -1,30 +1,34 @@
-import {Space_Grotesk , Work_Sans} from "next/font/google";
-import "./globals.css"
+import { Merriweather } from "next/font/google";
+import "./globals.css";
 import Navbar from "./components/Navbar";
 
-const spaceGrotesque = Space_Grotesk({
-  subsets: ["Latin"],
-  variable: "--font-space-grotesk"
+const merriweather = Merriweather({
+  subsets: ["latin"],
+  weight: ["300", "400", "700", "900"],
+  style: ["normal", "italic"],
+  variable: "--font-merriweather"
 });
 
-const workSans = Work_Sans({
-  subsets: ["Latin"],
-  variable: "--font-work-sans"
-})
+// app/layout.js
+export const metadata = {
+  title: "Farm Snacks",
+  description: "Fresh, healthy freeze-dried snacks straight from the farm.",
+  icons: {
+    icon: '/favicon.ico', 
+  },
+};
 
-export default function RootLayout({children}){
-
+export default function RootLayout({ children }) {
   return (
-      <html lang="en">
-        <body className={`${spaceGrotesque.variable} ${workSans.variable} bg-background text-on-background font-work`}>
-          <Navbar />
+    <html lang="en">
+      
+      <body className={`${merriweather.variable} bg-background text-on-background font-merriweather`}>
+        <Navbar />
+        <main>
+          {children}
+        </main>
+      </body>
 
-          <main>
-            {children}
-          </main>
-
-        </body>
-      </html>
-  )
-
+    </html>
+  );
 }

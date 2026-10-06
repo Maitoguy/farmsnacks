@@ -1,6 +1,10 @@
 @import "tailwindcss";
 
 @theme {
+
+    /* Fonts */
+    --font-merriweather: var(--font-merriweather), serif;
+
     /* Farm-to-Snack Colors */
     --color-surface: #fff8f6;
     --color-surface-dim: #e4d7d4;
