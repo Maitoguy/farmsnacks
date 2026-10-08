@@ -2,18 +2,31 @@
 
 import { useState, useEffect } from "react";
 import { useCartStore } from "@/store/userCart";
-import { products } from "../../../public/data"; // Adjust path if needed
+import { products } from "../../../public/data"; 
 import { ArrowLeft, CreditCard, ShieldCheck, Truck } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import PaymentSuccess from "../components/PaymentSuccess";
+
+const indianStates = [
+    "Andaman and Nicobar Islands", "Andhra Pradesh", "Arunachal Pradesh", "Assam", 
+    "Bihar", "Chandigarh", "Chhattisgarh", "Dadra and Nagar Haveli and Daman and Diu", 
+    "Delhi", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jammu and Kashmir", 
+    "Jharkhand", "Karnataka", "Kerala", "Ladakh", "Lakshadweep", "Madhya Pradesh", 
+    "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", 
+    "Puducherry", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", 
+    "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal"
+];
 
 export default function CheckoutPage() {
+    const router = useRouter();
     const cartItems = useCartStore((state) => state.cartItems);
     const [isMounted, setIsMounted] = useState(false);
+    const [isSuccess, setIsSuccess] = useState(false);
 
-    // Form State
     const [formData, setFormData] = useState({
         firstName: '', middleName: '', lastName: '',
-        email: '', phone: '', state: '', city: '', pincode: '', address: ''
+        email: '', phone: '', flat: '', area: '', landmark: '', city: '', state: '', pincode: ''
     });
 
     useEffect(() => {
@@ -21,12 +34,25 @@ export default function CheckoutPage() {
     }, []);
 
     const handleInputChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        const { name, value } = e.target;
+        
+        if (name === "phone") {
+            const numericValue = value.replace(/[^0-9]/g, "");
+            if (numericValue.length <= 10) {
+                setFormData({ ...formData, [name]: numericValue });
+            }
+        } else if (name === "pincode") {
+            const numericValue = value.replace(/[^0-9]/g, "");
+            if (numericValue.length <= 6) {
+                setFormData({ ...formData, [name]: numericValue });
+            }
+        } else {
+            setFormData({ ...formData, [name]: value });
+        }
     };
 
     if (!isMounted) return null;
 
-    // Calculate pricing
     const populatedCart = cartItems.map((cartItem) => {
         const fullProduct = products.find((p) => p.id === cartItem.id);
         return { ...fullProduct, count: cartItem.count };
@@ -36,7 +62,6 @@ export default function CheckoutPage() {
     const shippingFee = 10;
     const finalTotal = subtotal + shippingFee;
 
-    // Razorpay Script Loader
     const loadRazorpayScript = () => {
         return new Promise((resolve) => {
             const script = document.createElement('script');
@@ -47,9 +72,18 @@ export default function CheckoutPage() {
         });
     };
 
-    // Main Payment Handler
     const handlePayment = async (e) => {
         e.preventDefault(); 
+
+        if (formData.phone.length !== 10) {
+            alert("Please enter a valid 10-digit phone number.");
+            return;
+        }
+        
+        if (formData.pincode.length !== 6) {
+            alert("Please enter a valid 6-digit pincode.");
+            return;
+        }
 
         const res = await loadRazorpayScript();
         if (!res) {
@@ -57,7 +91,6 @@ export default function CheckoutPage() {
             return;
         }
 
-        // Step A: Ask backend to create an order
         const orderResponse = await fetch('/api/create-order', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -71,7 +104,6 @@ export default function CheckoutPage() {
         
         const orderData = await orderResponse.json();
 
-        // Step B: Open Razorpay Modal
         const options = {
             key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, 
             amount: orderData.amount,
@@ -81,7 +113,6 @@ export default function CheckoutPage() {
             order_id: orderData.orderId,
             handler: async function (response) {
                 
-                // Step C: Send success details to backend for verification and Firebase storage
                 const verificationResponse = await fetch('/api/verify-payment', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
@@ -96,8 +127,11 @@ export default function CheckoutPage() {
 
                 const verifyData = await verificationResponse.json();
                 if (verifyData.success) {
-                    alert("Payment Successful! Order placed.");
-                    // You can clear the cart and redirect here later
+                    setIsSuccess(true);
+                    useCartStore.setState({ cartItems: [] });
+                    setTimeout(() => {
+                        router.push("/");
+                    }, 3000);
                 } else {
                     alert("Payment verification failed. Please contact support.");
                 }
@@ -107,14 +141,17 @@ export default function CheckoutPage() {
                 email: formData.email,
                 contact: formData.phone
             },
-            theme: { color: "#9a4600" } // Farm Snacks primary color
+            theme: { color: "#9a4600" } 
         };
 
         const paymentObject = new window.Razorpay(options);
         paymentObject.open();
     };
 
-    // Empty Cart UI
+    if (isSuccess) {
+        return <PaymentSuccess />;
+    }
+
     if (populatedCart.length === 0) {
         return (
             <main className="min-h-screen bg-background flex flex-col items-center justify-center p-6 text-on-background">
@@ -128,10 +165,8 @@ export default function CheckoutPage() {
 
     return (
         <main className="min-h-screen bg-background text-on-background p-6 md:p-12">
-            {/* The entire layout is wrapped in the form tag so the submit button works */}
             <form onSubmit={handlePayment} className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-8">
                 
-                {/* Left Side: Shipping Form */}
                 <div className="flex-1 bg-surface-container-lowest border border-outline-variant rounded-xl shadow-hard p-6 md:p-8">
                     <div className="flex items-center gap-3 border-b border-outline-variant pb-4 mb-6">
                         <Truck size={28} className="text-primary" />
@@ -139,7 +174,6 @@ export default function CheckoutPage() {
                     </div>
 
                     <div className="flex flex-col gap-5">
-                        {/* Name Fields */}
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div className="flex flex-col gap-1">
                                 <label className="text-sm font-bold text-on-surface-variant">First Name</label>
@@ -155,7 +189,6 @@ export default function CheckoutPage() {
                             </div>
                         </div>
 
-                        {/* Contact Fields */}
                         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div className="flex flex-col gap-1">
                                 <label className="text-sm font-bold text-on-surface-variant">Email</label>
@@ -163,35 +196,48 @@ export default function CheckoutPage() {
                             </div>
                             <div className="flex flex-col gap-1">
                                 <label className="text-sm font-bold text-on-surface-variant">Phone Number</label>
-                                <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} className="p-3 bg-surface-container border border-outline-variant rounded-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" required />
+                                <input type="tel" name="phone" value={formData.phone} onChange={handleInputChange} minLength={10} maxLength={10} pattern="[0-9]{10}" title="10-digit mobile number" className="p-3 bg-surface-container border border-outline-variant rounded-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" required />
                             </div>
                         </div>
 
-                        {/* Location Fields */}
+                        <div className="flex flex-col gap-1">
+                            <label className="text-sm font-bold text-on-surface-variant">Flat, House no., Building, Company, Apartment</label>
+                            <input type="text" name="flat" value={formData.flat} onChange={handleInputChange} className="p-3 bg-surface-container border border-outline-variant rounded-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" required />
+                        </div>
+
+                        <div className="flex flex-col gap-1">
+                            <label className="text-sm font-bold text-on-surface-variant">Area, Street, Sector, Village</label>
+                            <input type="text" name="area" value={formData.area} onChange={handleInputChange} className="p-3 bg-surface-container border border-outline-variant rounded-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" required />
+                        </div>
+
+                        <div className="flex flex-col gap-1">
+                            <label className="text-sm font-bold text-on-surface-variant">Landmark</label>
+                            <input type="text" name="landmark" value={formData.landmark} onChange={handleInputChange} className="p-3 bg-surface-container border border-outline-variant rounded-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" required />
+                        </div>
+
                         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <div className="flex flex-col gap-1">
-                                <label className="text-sm font-bold text-on-surface-variant">State</label>
-                                <input type="text" name="state" value={formData.state} onChange={handleInputChange} className="p-3 bg-surface-container border border-outline-variant rounded-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" required />
-                            </div>
-                            <div className="flex flex-col gap-1">
-                                <label className="text-sm font-bold text-on-surface-variant">City</label>
+                                <label className="text-sm font-bold text-on-surface-variant">Town / City</label>
                                 <input type="text" name="city" value={formData.city} onChange={handleInputChange} className="p-3 bg-surface-container border border-outline-variant rounded-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" required />
                             </div>
                             <div className="flex flex-col gap-1">
+                                <label className="text-sm font-bold text-on-surface-variant">State</label>
+                                <select name="state" value={formData.state} onChange={handleInputChange} className="p-3 bg-surface-container border border-outline-variant rounded-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all appearance-none" required>
+                                    <option value="" disabled>Select State</option>
+                                    {indianStates.map((st) => (
+                                        <option key={st} value={st}>{st}</option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className="flex flex-col gap-1">
                                 <label className="text-sm font-bold text-on-surface-variant">Pincode</label>
-                                <input type="text" name="pincode" value={formData.pincode} onChange={handleInputChange} className="p-3 bg-surface-container border border-outline-variant rounded-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" required />
+                                <input type="text" name="pincode" value={formData.pincode} onChange={handleInputChange} minLength={6} maxLength={6} pattern="[0-9]{6}" title="6-digit PIN code" className="p-3 bg-surface-container border border-outline-variant rounded-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all" required />
                             </div>
                         </div>
 
-                        {/* Address Field */}
-                        <div className="flex flex-col gap-1">
-                            <label className="text-sm font-bold text-on-surface-variant">Full Address</label>
-                            <textarea name="address" value={formData.address} onChange={handleInputChange} rows="3" className="p-3 bg-surface-container border border-outline-variant rounded-md focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all resize-none" required></textarea>
-                        </div>
                     </div>
                 </div>
 
-                {/* Right Side: Order Summary & Payment */}
                 <div className="w-full lg:w-96 flex flex-col gap-6">
                     <div className="bg-surface-container-lowest border border-outline-variant rounded-xl shadow-hard p-6">
                         <div className="flex items-center gap-3 border-b border-outline-variant pb-4 mb-4">
@@ -223,7 +269,6 @@ export default function CheckoutPage() {
                             </div>
                         </div>
 
-                        {/* Setting type="submit" will trigger the form's onSubmit handler */}
                         <button type="submit" className="w-full bg-primary text-on-primary font-bold py-4 rounded-md shadow-hard hover:bg-surface-tint transition-colors flex items-center justify-center gap-2 cursor-pointer">
                             <CreditCard size={20} />
                             Pay ₹{finalTotal.toFixed(2)} Now
