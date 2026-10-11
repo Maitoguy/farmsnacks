@@ -112,28 +112,55 @@ export default function CheckoutPage() {
             description: "Delicious farm fresh snacks",
             order_id: orderData.orderId,
             handler: async function (response) {
-                
-                const verificationResponse = await fetch('/api/verify-payment', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({
-                        razorpay_order_id: response.razorpay_order_id,
-                        razorpay_payment_id: response.razorpay_payment_id,
-                        razorpay_signature: response.razorpay_signature,
-                        shippingDetails: formData,
-                        cartItems: populatedCart
-                    })
-                });
+                try {
+                    console.log("Payment successful, verifying with server...");
+                    
+                    const verificationResponse = await fetch('/api/verify-payment', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_signature: response.razorpay_signature,
+                            shippingDetails: formData,
+                            cartItems: populatedCart
+                        })
+                    });
 
-                const verifyData = await verificationResponse.json();
-                if (verifyData.success) {
-                    setIsSuccess(true);
-                    useCartStore.setState({ cartItems: [] });
-                    setTimeout(() => {
-                        router.push("/");
-                    }, 3000);
-                } else {
-                    alert("Payment verification failed. Please contact support.");
+                    let verifyData;
+                    try {
+                        verifyData = await verificationResponse.json();
+                    } catch (parseError) {
+                        console.error("Failed to parse JSON from server:", parseError);
+                        throw new Error("Invalid server response");
+                    }
+
+                    if (verifyData.success) {
+                        console.log("Verification successful! Triggering UI update.");
+                        
+                        // 1. Show success screen
+                        setIsSuccess(true);
+                        
+                        // 2. Safely clear the cart
+                        try {
+                            useCartStore.setState({ cartItems: [] });
+                        } catch (storeError) {
+                            console.warn("Zustand setState failed, cart might not be empty:", storeError);
+                        }
+
+                        // 3. Redirect using Next.js router
+                        setTimeout(() => {
+                            router.push("/");
+                        }, 3000);
+                        
+                    } else {
+                        alert("Payment verification failed. Please contact support.");
+                    }
+                } catch (error) {
+                    console.error("CRASH IN RAZORPAY HANDLER:", error);
+                    alert("Payment was received, but there was an error updating your screen. Returning to home.");
+                    // Next.js approved routing fallback
+                    router.push("/"); 
                 }
             },
             prefill: {
