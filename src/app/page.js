@@ -1,12 +1,42 @@
+import { initializeApp, getApps, cert } from 'firebase-admin/app';
+import { getFirestore } from 'firebase-admin/firestore';
 import { products } from "../../public/data";
 import ProductCard from "./components/ProductCard";
 import { Filter } from "lucide-react";
-import {DroppingFruit} from "./components/DroppingFruit";
+import { DroppingFruit } from "./components/DroppingFruit";
 import Checkout from "./components/Checkout";
 import FlowingText from "./components/FlowingText";
 import HeroCarousel from "./components/Carousel";
 
-export default function Home() {
+// 1. Initialize Firebase Admin securely for the Server Component
+let db;
+try {
+    if (!getApps().length) {
+        initializeApp({
+            credential: cert({
+                projectId: process.env.FIREBASE_PROJECT_ID,
+                clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+                privateKey: process.env.FIREBASE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
+            }),
+        });
+    }
+    db = getFirestore();
+} catch (error) {
+    console.error("🚨 PAGE.JS FIREBASE INIT ERROR:", error.message);
+}
+
+// 2. Change to 'async' function to allow awaiting the database check
+export default async function Home() {
+    
+    // 3. Ping the database on page load and log the result
+    try {
+        if (db) {
+            await db.collection('orders').limit(1).get();
+            console.log("✅ page.js: Database is securely connected on the server!");
+        }
+    } catch (error) {
+        console.error("🚨 page.js: Database connection failed:", error.message);
+    }
 
     return (
         <main className="flex flex-col min-h-screen bg-background text-on-background">
