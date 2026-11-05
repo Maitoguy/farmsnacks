@@ -51,6 +51,11 @@ export default function ProductCard({ product }) {
         })
     };
 
+    const currentImage = product.image[currentIndex];
+    const imageSrc = currentImage.startsWith('http') 
+        ? currentImage 
+        : `${basePath}${currentImage}`;
+
     return (
         <div className="bg-surface-container-lowest border border-outline-variant rounded-lg flex flex-col shadow-sm">
 
@@ -69,7 +74,7 @@ export default function ProductCard({ product }) {
                         }}
                         className="absolute inset-0"
                     >
-                        <Image src={`${basePath}${product.image[currentIndex]}`} 
+                        <Image src={imageSrc} 
                             alt={product.product_name} 
                             fill 
                             className="object-contain p-4" 

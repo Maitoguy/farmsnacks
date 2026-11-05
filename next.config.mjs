@@ -7,6 +7,7 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'placehold.co',
+        hostname: 'res.cloudinary.com',
       },
     ],
     // Placehold.co sometimes routes to SVGs. This prevents Next.js errors for external SVGs.

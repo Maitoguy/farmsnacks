@@ -1,11 +1,116 @@
 export const products = [
   {
+    "id": 110,
+    "product_name": "MirchMahal",
+    "description_card": "Fiery peri peri coated roasted makhana for a royal, spicy crunch.",
+    "price": 6.99,
+    "quantity": "150g",
+    "image": [
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1793456366/Gemini_Generated_Image_gq5qjigq5qjigq5q.png",
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1793456369/pudina-mint-2.png"
+    ],
+    "Nutrition": {
+      "Calories": "352 kcal",
+      "Carbohydrates": "74g",
+      "Protein": "9.5g",
+      "Fat": "2.5g",
+      "Fiber": "14g",
+      "Sugar": "1g"
+    },
+    "description_detail": "A majestic blend of fiery African bird's eye chili and royal Indian spices. MirchMahal delivers a bold, tangy, and spicy peri peri kick with every airy crunch of our premium roasted fox nuts. Perfect for those who crave a fiery, guilt-free snack.",
+    "svg_icon": "<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M4 13h16l-1.6 6.4A2 2 0 0 1 16.46 21H7.54a2 2 0 0 1-1.94-1.6L4 13Z' fill='#DC2626'/><circle cx='8' cy='10' r='3' fill='#FCA5A5'/><circle cx='12' cy='8' r='3.2' fill='#FECACA'/><circle cx='16' cy='10' r='3' fill='#F87171'/><circle cx='10' cy='11.5' r='1.8' fill='#B91C1C' opacity='.35'/><circle cx='14' cy='11.5' r='1.8' fill='#B91C1C' opacity='.35'/></svg>"
+  },
+  {
+    "id": 111,
+    "product_name": "MakhanMahal",
+    "description_card": "Luxuriously rich butter and cheese dusted makhana for a melt-in-the-mouth treat.",
+    "price": 6.99,
+    "quantity": "150g",
+    "image": [
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1793456365/Gemini_Generated_Image_e4zam0e4zam0e4za.png",
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1793456366/Gemini_Generated_Image_e4zam0e4zam0e4za-2.png"
+    ],
+    "Nutrition": {
+      "Calories": "365 kcal",
+      "Carbohydrates": "72g",
+      "Protein": "10g",
+      "Fat": "4.5g",
+      "Fiber": "12g",
+      "Sugar": "1g"
+    },
+    "description_detail": "Experience the grandeur of MakhanMahal. We've taken our premium roasted makhana and dusted them generously with creamy butter and rich, savory cheese. It's a decadent, melt-in-your-mouth flavor profile that feels indulgent but remains delightfully light.",
+    "svg_icon": "<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M4 13h16l-1.6 6.4A2 2 0 0 1 16.46 21H7.54a2 2 0 0 1-1.94-1.6L4 13Z' fill='#EAB308'/><circle cx='8' cy='10' r='3' fill='#FEF08A'/><circle cx='12' cy='8' r='3.2' fill='#FEF9C3'/><circle cx='16' cy='10' r='3' fill='#FDE047'/><circle cx='10' cy='11.5' r='1.8' fill='#CA8A04' opacity='.35'/><circle cx='14' cy='11.5' r='1.8' fill='#CA8A04' opacity='.35'/></svg>"
+  },
+  {
+    "id": 112,
+    "product_name": "Gulabi Noor",
+    "description_card": "Delicate Himalayan pink salt and cracked black pepper on crisp roasted makhana.",
+    "price": 6.99,
+    "quantity": "150g",
+    "image": [
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1793456368/Gemini_Generated_Image_ugdca4ugdca4ugdc.png",
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1793456367/Gemini_Generated_Image_ugdca4ugdca4ugdc-2.png"
+    ],
+    "Nutrition": {
+      "Calories": "345 kcal",
+      "Carbohydrates": "75g",
+      "Protein": "9.5g",
+      "Fat": "0.5g",
+      "Fiber": "14g",
+      "Sugar": "0g"
+    },
+    "description_detail": "Simplicity at its most elegant. Gulabi Noor highlights the natural crunch of fox nuts with a delicate seasoning of mineral-rich Himalayan pink salt and a sharp hint of freshly cracked black pepper. A sophisticated, savory snack for refined palates.",
+    "svg_icon": "<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M4 13h16l-1.6 6.4A2 2 0 0 1 16.46 21H7.54a2 2 0 0 1-1.94-1.6L4 13Z' fill='#F472B6'/><circle cx='8' cy='10' r='3' fill='#FBCFE8'/><circle cx='12' cy='8' r='3.2' fill='#FDF2F8'/><circle cx='16' cy='10' r='3' fill='#F9A8D4'/><circle cx='10' cy='11.5' r='1.8' fill='#374151' opacity='.7'/><circle cx='14' cy='11.5' r='1.8' fill='#374151' opacity='.7'/></svg>"
+  },
+  {
+    "id": 113,
+    "product_name": "Pudina Darbaar",
+    "description_card": "Refreshing mint and aromatic spices generously coated on airy roasted fox nuts.",
+    "price": 6.99,
+    "quantity": "150g",
+    "image": [
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1793456364/Gemini_Generated_Image_64ur8g64ur8g64ur.png",
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1793456363/Gemini_Generated_Image_64ur8g64ur8g64ur-2.png"
+    ],
+    "Nutrition": {
+      "Calories": "348 kcal",
+      "Carbohydrates": "74g",
+      "Protein": "9.8g",
+      "Fat": "1.2g",
+      "Fiber": "14.5g",
+      "Sugar": "1g"
+    },
+    "description_detail": "Step into the Pudina Darbaar. These roasted makhana are generously tossed in a refreshing, zesty blend of dried mint leaves, tangy mango powder (amchur), and aromatic spices. It's a cooling, tangy flavor bomb that keeps you coming back for more.",
+    "svg_icon": "<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M4 13h16l-1.6 6.4A2 2 0 0 1 16.46 21H7.54a2 2 0 0 1-1.94-1.6L4 13Z' fill='#10B981'/><circle cx='8' cy='10' r='3' fill='#A7F3D0'/><circle cx='12' cy='8' r='3.2' fill='#D1FAE5'/><circle cx='16' cy='10' r='3' fill='#6EE7B7'/><circle cx='10' cy='11.5' r='1.8' fill='#047857' opacity='.4'/><circle cx='14' cy='11.5' r='1.8' fill='#047857' opacity='.4'/></svg>"
+  },
+  {
+    "id": 114,
+    "product_name": "Nawabi Nazaakat",
+    "description_card": "Smooth cream and zesty onion flavors crowning our perfectly roasted makhana.",
+    "price": 6.99,
+    "quantity": "150g",
+    "image": [
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1793456365/Gemini_Generated_Image_a09wq5a09wq5a09w.png",
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1793456365/Gemini_Generated_Image_a09wq5a09wq5a09w-2.png"
+    ],
+    "Nutrition": {
+      "Calories": "360 kcal",
+      "Carbohydrates": "73g",
+      "Protein": "9.6g",
+      "Fat": "3.5g",
+      "Fiber": "13g",
+      "Sugar": "2g"
+    },
+    "description_detail": "Nawabi Nazaakat brings the universally loved pairing of smooth sour cream and zesty spring onion to India's favorite superfood. The velvety seasoning perfectly complements the crunch of the roasted fox nuts, creating an elegantly savory snacking experience.",
+    "svg_icon": "<svg viewBox='0 0 24 24' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M4 13h16l-1.6 6.4A2 2 0 0 1 16.46 21H7.54a2 2 0 0 1-1.94-1.6L4 13Z' fill='#E5E7EB'/><circle cx='8' cy='10' r='3' fill='#F9FAFB'/><circle cx='12' cy='8' r='3.2' fill='#FFFFFF'/><circle cx='16' cy='10' r='3' fill='#F3F4F6'/><circle cx='10' cy='11.5' r='1.8' fill='#4ADE80' opacity='.6'/><circle cx='14' cy='11.5' r='1.8' fill='#4ADE80' opacity='.6'/></svg>"
+  },
+  {
     "id": 101,
     "product_name": "Beet Burst",
     "description_card": "Crunchy, earthy beetroot slices naturally sweetened by the sun.",
     "price": 4.99,
     "quantity": "150g",
-    "image": ["/beet-burst/beet-burst-1.jpg" , "/beet-burst/beet-burst-2.jpg" , "/beet-burst/beet-burst-3.jpg"],
+    "image": ["/beet-burst/beet-burst-3.jpg" , "/beet-burst/beet-burst-2.jpg" , "/beet-burst/beet-burst-1.jpg"],
     "Nutrition": {
       "Calories": "210 kcal",
       "Carbohydrates": "45g",
@@ -23,7 +128,7 @@ export const products = [
     "description_card": "Crispy, lightly spiced whole okra pods for a savory, guilt-free crunch.",
     "price": 3.49,
     "quantity": "120g",
-    "image": ["/bhindi-master/bhindi-master-1.jpg" , "/bhindi-master/bhindi-master-2.jpg" , "/bhindi-master/bhindi-master-3.jpg"],
+    "image": ["/bhindi-master/bhindi-master-3.jpg" , "/bhindi-master/bhindi-master-2.jpg" , "/bhindi-master/bhindi-master-1.jpg"],
     "Nutrition": {
       "Calories": "180 kcal",
       "Carbohydrates": "20g",
@@ -41,7 +146,7 @@ export const products = [
     "description_card": "A vibrant medley of sun-dried berries, tropical mangoes, and chewy bananas.",
     "price": 5.50,
     "quantity": "200g",
-    "image": ["/fruit-fusion/fruit-fusion-1.jpg" , "/fruit-fusion/fruit-fusion-2.jpg" , "/fruit-fusion/fruit-fusion-3.jpg"],
+    "image": ["/fruit-fusion/fruit-fusion-3.jpg" , "/fruit-fusion/fruit-fusion-2.jpg" , "/fruit-fusion/fruit-fusion-1.jpg"],
     "Nutrition": {
       "Calories": "310 kcal",
       "Carbohydrates": "78g",
@@ -89,7 +194,7 @@ export const products = [
     "description_detail": "Sourced from the finest 'Miracle Trees,' our premium Moringa Powder is shade-dried to lock in its vibrant green color and potent vitamins. With a mild, earthy flavor, it’s the perfect superfood addition to your smoothies, teas, and morning juices.",
     "svg_icon": "<svg viewBox=\"0 0 24 24\" fill=\"#15803D\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 22V6M12 14c-4-2-6 0-6 0s1-3 6-2M12 10c4-2 6 0 6 0s-1-3-6-2\" stroke=\"#16A34A\" stroke-width=\"2\" fill=\"none\"/><path d=\"M12 4C9 1 7 4 7 4s2 3 5 3 5-3 5-3-2-3-5-3z\"/></svg>"
   },
-    {
+  {
     "id": 106,
     "product_name": "Roasted Makhana",
     "description_card": "Light, crunchy roasted fox nuts with a mild nutty flavor—an airy, guilt-free snack.",
