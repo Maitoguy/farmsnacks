@@ -1,11 +1,22 @@
 "use client";
 
-import React, { useState } from "react";
-import Image from "next/image";
+import React, { useState, useRef } from "react";
 import { Star, Clock, Utensils, Zap, Play, Pause, Volume2, Maximize } from "lucide-react";
 
 export default function WeeklyFeature({ data }) {
   const [isPlaying, setIsPlaying] = useState(false);
+  const videoRef = useRef(null);
+
+  const togglePlay = () => {
+    if (videoRef.current) {
+      if (isPlaying) {
+        videoRef.current.pause();
+      } else {
+        videoRef.current.play();
+      }
+      setIsPlaying(!isPlaying);
+    }
+  };
 
   return (
     <section className="flex flex-col gap-6 w-full">
@@ -21,14 +32,17 @@ export default function WeeklyFeature({ data }) {
         {/* Left: Interactive Video Player */}
         <div className="w-full lg:w-5/12 flex flex-col items-center">
           <div className="relative w-full max-w-sm aspect-9/16 rounded-xl overflow-hidden bg-deep-forest shadow-[4px_4px_0px_0px_#1A1A1A] flex flex-col justify-between p-4 group">
-            <Image 
-              src={data.videoPoster}
-              alt="Recipe Video"
-              fill
-              className="object-cover"
-              unoptimized
+            
+            <video 
+              ref={videoRef}
+              src="https://res.cloudinary.com/uxe7zg48/video/upload/v1793969976/gemini_generated_video_11101b8e.mp4"
+              poster={data.videoPoster}
+              className="absolute inset-0 w-full h-full object-cover z-0"
+              loop
+              playsInline
             />
-            <div className="absolute inset-0 bg-linear-to-t from-deep-forest/90 via-transparent to-deep-forest/40 pointer-events-none"></div>
+            
+            <div className="absolute inset-0 bg-linear-to-t from-deep-forest/90 via-transparent to-deep-forest/40 pointer-events-none z-0"></div>
             
             <div className="relative z-10 flex items-center justify-between">
               <span className="px-3 py-1 rounded-full bg-paper-white/90 text-on-surface font-bold text-xs uppercase tracking-wider shadow-sm">
@@ -42,7 +56,7 @@ export default function WeeklyFeature({ data }) {
 
             <div className="relative z-10 self-center my-auto">
               <button 
-                onClick={() => setIsPlaying(!isPlaying)}
+                onClick={togglePlay}
                 className="w-16 h-16 rounded-full bg-primary text-on-primary flex items-center justify-center shadow-[3px_3px_0px_0px_#1A1A1A] active:scale-90 transition-transform cursor-pointer"
               >
                 {isPlaying ? <Pause size={32} fill="currentColor" /> : <Play size={32} fill="currentColor" className="ml-1" />}
@@ -55,7 +69,7 @@ export default function WeeklyFeature({ data }) {
               </div>
               <div className="flex items-center justify-between text-xs">
                 <div className="flex items-center gap-3">
-                  <Play size={16} className="cursor-pointer hover:text-citrus-orange" />
+                  <Play size={16} className="cursor-pointer hover:text-citrus-orange" onClick={togglePlay} />
                   <Volume2 size={16} className="cursor-pointer hover:text-citrus-orange" />
                   <span>0:14 / 0:35</span>
                 </div>
@@ -138,4 +152,4 @@ export default function WeeklyFeature({ data }) {
       </div>
     </section>
   );
-}
+}   

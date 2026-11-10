@@ -2,14 +2,27 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useCartStore } from "@/store/userCart";
-import { useEffect, useState } from "react";
-import { products } from "../../../public/data"; 
-import { ShieldCheck, ShoppingCart, ArrowLeft, CreditCard, Receipt, X, Plus, Minus } from 'lucide-react';
-import {useRouter} from 'next/navigation';
-import Image from 'next/image';
+import { useEffect, useSyncExternalStore } from "react";
+import { products } from "../../../public/data";
+import {
+    ShieldCheck,
+    ShoppingCart,
+    ArrowLeft,
+    CreditCard,
+    Receipt,
+    X,
+    Plus,
+    Minus,
+} from "lucide-react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
+
+// Hydration-safe client check — no setState-in-effect, no cascading render
+const emptySubscribe = () => () => {};
+const useIsClient = () =>
+    useSyncExternalStore(emptySubscribe, () => true, () => false);
 
 export default function Checkout() {
-
     const basePath = "/product-image";
     const isCheckoutOpen = useCartStore((state) => state.isCheckoutOpen);
     const toggleCheckout = useCartStore((state) => state.toggleCheckout);
@@ -20,38 +33,52 @@ export default function Checkout() {
     const addToCart = useCartStore((state) => state.addToCart);
     const decrementItem = useCartStore((state) => state.decrementItem);
 
-    // Hydration fix
-    const [isMounted, setIsMounted] = useState(false);
+    const isMounted = useIsClient();
 
+    // Legitimate effect: sync body overflow with modal state (external DOM system)
     useEffect(() => {
-        setIsMounted(true);
-        if (isCheckoutOpen) {
-            document.body.style.overflow = "hidden";
-        } else {
+        document.body.style.overflow = isCheckoutOpen ? "hidden" : "auto";
+        return () => {
             document.body.style.overflow = "auto";
-        }
-        return () => { document.body.style.overflow = "auto"; };
+        };
     }, [isCheckoutOpen]);
 
     if (!isMounted) return null;
 
-    // Look up the full product details based on the saved IDs
-    const populatedCart = cartItems.map((cartItem) => {
-        const fullProduct = products.find((p) => p.id === cartItem.id);
-        if (!fullProduct) return null;
-        return {
-            ...fullProduct,
-            image: Array.isArray(fullProduct.image) ? fullProduct.image[0] : fullProduct.image,
-            count: cartItem.count,
-        };
-    }).filter(Boolean);
+    // Resolve image URLs (Cloudinary vs local) BEFORE rendering
+    const populatedCart = cartItems
+        .map((cartItem) => {
+            const fullProduct = products.find((p) => p.id === cartItem.id);
+            if (!fullProduct) return null;
 
-    const totalPrice = populatedCart.reduce((total, item) => total + (item.price * item.count), 0);
+            const rawImage = Array.isArray(fullProduct.image)
+                ? fullProduct.image[0]
+                : fullProduct.image;
+
+            const resolvedImage =
+                typeof rawImage === "string" && rawImage.trim() !== ""
+                    ? rawImage.startsWith("http")
+                        ? rawImage                   // Cloudinary / remote
+                        : `${basePath}${rawImage}`   // local /public/product-image
+                    : "/placeholder.png";            // fallback
+
+            return {
+                ...fullProduct,
+                image: resolvedImage,
+                count: cartItem.count,
+            };
+        })
+        .filter(Boolean);
+
+    const totalPrice = populatedCart.reduce(
+        (total, item) => total + item.price * item.count,
+        0
+    );
 
     const handleProceedToCheckout = () => {
         toggleCheckout();
         router.push("/checkout");
-    }
+    };
 
     return (
         <AnimatePresence>
@@ -62,7 +89,7 @@ export default function Checkout() {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         className="absolute inset-0 bg-on-background/40 backdrop-blur-sm"
-                        onClick={toggleCheckout} // Closes when clicking background
+                        onClick={toggleCheckout}
                     />
 
                     <motion.div
@@ -72,16 +99,22 @@ export default function Checkout() {
                         transition={{ type: "spring", damping: 25, stiffness: 300 }}
                         className="relative w-full max-w-2xl bg-surface-container-lowest border border-outline-variant shadow-2xl rounded-xl overflow-hidden flex flex-col max-h-[90vh]"
                     >
+                        {/* Header */}
                         <div className="bg-primary text-on-primary p-6 flex justify-between items-center shadow-sm">
                             <h2 className="text-2xl font-bold flex items-center gap-3">
                                 <ShieldCheck size={32} />
                                 Your Basket
                             </h2>
-                            <button onClick={toggleCheckout} className="hover:text-primary-fixed-dim transition-colors cursor-pointer">
+                            <button
+                                onClick={toggleCheckout}
+                                className="hover:text-primary-fixed-dim transition-colors cursor-pointer"
+                                aria-label="Close cart"
+                            >
                                 <X size={32} />
                             </button>
                         </div>
 
+                        {/* Body */}
                         <div className="grow overflow-y-auto p-6 flex flex-col gap-4 bg-background">
                             {populatedCart.length === 0 ? (
                                 <div className="text-center py-12 text-on-surface-variant flex flex-col items-center">
@@ -90,11 +123,14 @@ export default function Checkout() {
                                 </div>
                             ) : (
                                 populatedCart.map((item) => (
-                                    <div key={item.id} className="flex justify-between items-center bg-surface-container p-4 rounded-lg border border-outline-variant/50">
+                                    <div
+                                        key={item.id}
+                                        className="flex justify-between items-center bg-surface-container p-4 rounded-lg border border-outline-variant/50"
+                                    >
                                         <div className="flex items-center gap-4">
                                             <div className="relative w-16 h-16 shrink-0 bg-surface-container-lowest rounded-md overflow-hidden border border-outline-variant">
                                                 <Image
-                                                    src={`${basePath}${item.image}`}
+                                                    src={item.image}
                                                     alt={item.product_name}
                                                     fill
                                                     sizes="64px"
@@ -102,8 +138,12 @@ export default function Checkout() {
                                                 />
                                             </div>
                                             <div>
-                                                <h4 className="font-bold text-on-surface">{item.product_name}</h4>
-                                                <p className="text-sm text-on-surface-variant">@ ₹{item.price.toFixed(2)} / ea</p>
+                                                <h4 className="font-bold text-on-surface">
+                                                    {item.product_name}
+                                                </h4>
+                                                <p className="text-sm text-on-surface-variant">
+                                                    @ ₹{item.price.toFixed(2)} / ea
+                                                </p>
                                             </div>
                                         </div>
 
@@ -115,6 +155,7 @@ export default function Checkout() {
                                                 <button
                                                     onClick={() => decrementItem(item.id)}
                                                     className="p-1.5 text-primary hover:bg-primary hover:text-on-primary transition-colors rounded-l-md cursor-pointer"
+                                                    aria-label="Decrease quantity"
                                                 >
                                                     <Minus size={16} strokeWidth={2.5} />
                                                 </button>
@@ -124,6 +165,7 @@ export default function Checkout() {
                                                 <button
                                                     onClick={() => addToCart(item)}
                                                     className="p-1.5 text-primary hover:bg-primary hover:text-on-primary transition-colors rounded-r-md cursor-pointer"
+                                                    aria-label="Increase quantity"
                                                 >
                                                     <Plus size={16} strokeWidth={2.5} />
                                                 </button>
@@ -134,13 +176,16 @@ export default function Checkout() {
                             )}
                         </div>
 
+                        {/* Footer */}
                         <div className="bg-surface p-6 border-t border-outline-variant">
                             <div className="flex justify-between items-center mb-6 text-xl font-bold text-on-surface">
                                 <span className="flex items-center gap-2">
                                     <Receipt size={24} className="text-on-surface-variant" />
                                     Total:
                                 </span>
-                                <span className="text-2xl text-primary">₹{totalPrice.toFixed(2)}</span>
+                                <span className="text-2xl text-primary">
+                                    ₹{totalPrice.toFixed(2)}
+                                </span>
                             </div>
                             <div className="flex gap-4">
                                 <button
