@@ -1,13 +1,19 @@
+export const BUNDLE_SIZE = 10;
+
 export const products = [
   {
     "id": 110,
-    "product_name": "MirchMahal",
+    "available": true,
+    "product_name": "Mirchi Mahal",
     "description_card": "Fiery peri peri coated roasted makhana for a royal, spicy crunch.",
-    "price": 6.99,
+    "price": 249,
     "quantity": "150g",
     "image": [
-      "https://res.cloudinary.com/uxe7zg48/image/upload/v1793456366/Gemini_Generated_Image_gq5qjigq5qjigq5q.png",
-      "https://res.cloudinary.com/uxe7zg48/image/upload/v1793456369/pudina-mint-2.png"
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1794495689/Farm_Snaks_Peri_Peri_Jar.png",
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1794495692/Spiced_Makhana_Crunch_Advertisement.png",
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1794495691/Peri_Peri_Snack_Jar_and_Bowl.png",
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1794495691/Peri_Peri_Makhana_Snack_Showcase.png",
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1794495690/Mirchi_Mahal_Peri_Peri_Makhana_Promo.png"
     ],
     "Nutrition": {
       "Calories": "352 kcal",
@@ -22,13 +28,17 @@ export const products = [
   },
   {
     "id": 111,
-    "product_name": "MakhanMahal",
+    "available": true,
+    "product_name": "Makhan Mahal",
     "description_card": "Luxuriously rich butter and cheese dusted makhana for a melt-in-the-mouth treat.",
-    "price": 6.99,
+    "price": 249,
     "quantity": "150g",
     "image": [
-      "https://res.cloudinary.com/uxe7zg48/image/upload/v1793456365/Gemini_Generated_Image_e4zam0e4zam0e4za.png",
-      "https://res.cloudinary.com/uxe7zg48/image/upload/v1793456366/Gemini_Generated_Image_e4zam0e4zam0e4za-2.png"
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1794495687/Butter_Cheese_Makhana_Snack_Jar.png",
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1794495687/Butter_Cheese_Makhana_Feast.png",
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1794495688/Butter_Cheese_Makhana_Snack_Spread.png",
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1794495688/Butter_Cheese_Makhana_Snack_Feast.png",
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1794495689/Crunch_Into_Butter_Cheese_Makhana.png"
     ],
     "Nutrition": {
       "Calories": "365 kcal",
@@ -43,13 +53,17 @@ export const products = [
   },
   {
     "id": 112,
+    "available": true,
     "product_name": "Gulabi Noor",
     "description_card": "Delicate Himalayan pink salt and cracked black pepper on crisp roasted makhana.",
-    "price": 6.99,
+    "price": 249,
     "quantity": "150g",
     "image": [
-      "https://res.cloudinary.com/uxe7zg48/image/upload/v1793456368/Gemini_Generated_Image_ugdca4ugdca4ugdc.png",
-      "https://res.cloudinary.com/uxe7zg48/image/upload/v1793456367/Gemini_Generated_Image_ugdca4ugdca4ugdc-2.png"
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1794495690/Gulabi_Noor_Pink_Salt_Snack_Jar.png",
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1794495691/Pink_Salt_Pepper_Snack_Delight.png",
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1794495690/Gulabi_Noor_Snack_Jar_Display.png",
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1794495690/Gulabi_Noor_Makhana_Snack_Promo.png",
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1794495689/Crunch_Into_Something_Special.png"
     ],
     "Nutrition": {
       "Calories": "345 kcal",
@@ -64,13 +78,17 @@ export const products = [
   },
   {
     "id": 113,
+    "available": true,
     "product_name": "Pudina Darbaar",
     "description_card": "Refreshing mint and aromatic spices generously coated on airy roasted fox nuts.",
-    "price": 6.99,
+    "price": 249,
     "quantity": "150g",
     "image": [
-      "https://res.cloudinary.com/uxe7zg48/image/upload/v1793456364/Gemini_Generated_Image_64ur8g64ur8g64ur.png",
-      "https://res.cloudinary.com/uxe7zg48/image/upload/v1793456363/Gemini_Generated_Image_64ur8g64ur8g64ur-2.png"
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1794495691/Pudina_Mint_Puffed_Snack_Jar.png",
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1794495692/Pudina_Mint_Snack_Advertisement.png",
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1794495691/Pudina_Darbaar_Mint_Snack_Showcase.png",
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1794495691/Pudina_Darbaar_Mint_Makhana_Poster.png",
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1794495689/Crunch_Into_Minty_Delight.png"
     ],
     "Nutrition": {
       "Calories": "348 kcal",
@@ -85,13 +103,17 @@ export const products = [
   },
   {
     "id": 114,
+    "available": true,
     "product_name": "Nawabi Nazaakat",
     "description_card": "Smooth cream and zesty onion flavors crowning our perfectly roasted makhana.",
-    "price": 6.99,
+    "price": 249,
     "quantity": "150g",
     "image": [
-      "https://res.cloudinary.com/uxe7zg48/image/upload/v1793456365/Gemini_Generated_Image_a09wq5a09wq5a09w.png",
-      "https://res.cloudinary.com/uxe7zg48/image/upload/v1793456365/Gemini_Generated_Image_a09wq5a09wq5a09w-2.png"
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1794495689/Farm_Snaks_Cream_Onion_Jar.png",
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1794495689/Crunch_Into_Something_Special-copy-0.png",
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1794495688/Cream_Onion_Snack_Delight.png",
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1794495690/Nawabi_Nazaaqat_Cream_Onion_Makhana.png",
+      "https://res.cloudinary.com/uxe7zg48/image/upload/v1794495688/Cream_Onion_Snack_Feast.png"
     ],
     "Nutrition": {
       "Calories": "360 kcal",
@@ -106,6 +128,7 @@ export const products = [
   },
   {
     "id": 101,
+    "available": false,
     "product_name": "Beet Burst",
     "description_card": "Crunchy, earthy beetroot slices naturally sweetened by the sun.",
     "price": 4.99,
@@ -124,6 +147,7 @@ export const products = [
   },
   {
     "id": 102,
+    "available": false,
     "product_name": "Bhindi Master",
     "description_card": "Crispy, lightly spiced whole okra pods for a savory, guilt-free crunch.",
     "price": 3.49,
@@ -142,6 +166,7 @@ export const products = [
   },
   {
     "id": 103,
+    "available": false,
     "product_name": "Fruit Fusion",
     "description_card": "A vibrant medley of sun-dried berries, tropical mangoes, and chewy bananas.",
     "price": 5.50,
@@ -160,6 +185,7 @@ export const products = [
   },
   {
     "id": 104,
+    "available": false,
     "product_name": "Jackfruit Chips",
     "description_card": "Golden, crunchy jackfruit crisps bursting with natural tropical sweetness.",
     "price": 3.99,
@@ -178,10 +204,12 @@ export const products = [
   },
   {
     "id": 105,
+    "available": true,
     "product_name": "Moringa Powder",
     "description_card": "Nutrient-dense, vibrant green moringa leaf powder to power your day.",
-    "price": 5.99,
-    "quantity": "50g",
+    "price": 250,
+    "isBundle": true,
+    "quantity": "50g × 10",
     "image": ["/moringa/moringa-leaf-drink.jpg"],
     "Nutrition": {
       "Calories": "110 kcal",
@@ -196,6 +224,7 @@ export const products = [
   },
   {
     "id": 106,
+    "available": false,
     "product_name": "Roasted Makhana",
     "description_card": "Light, crunchy roasted fox nuts with a mild nutty flavor—an airy, guilt-free snack.",
     "price": 6.49,
@@ -218,10 +247,12 @@ export const products = [
   },
   {
     "id": 107,
+    "available": true,
     "product_name": "Pine Powerdrink",
     "description_card": "An energizing, tangy pineapple drink blend packed with natural electrolytes.",
-    "price": 4.50,
-    "quantity": "120g",
+    "price": 250,
+    "isBundle": true,
+    "quantity": "120g × 10",
     "image": ["/pineapple-powerdrink/pineapple-powerdrink.jpg"],
     "Nutrition": {
       "Calories": "150 kcal",
@@ -236,10 +267,12 @@ export const products = [
   },
   {
     "id": 108,
+    "available": true,
     "product_name": "Amla Zing",
     "description_card": "Tangy, vitamin-C packed amla powder to nourish, detox, and energize your day.",
-    "price": 5.49,
-    "quantity": "5g",
+    "price": 250,
+    "isBundle": true,
+    "quantity": "5g × 10",
     "image": ["/amla-zing/amla-zing-1.png"],
     "Nutrition": {
       "Calories": "45 kcal",
@@ -254,10 +287,12 @@ export const products = [
   },
   {
     "id": 109,
+    "available": true,
     "product_name": "Beet Buzz",
     "description_card": "Earthy, iron-rich beetroot blend to support heart health and boost stamina.",
-    "price": 5.99,
-    "quantity": "5g",
+    "price": 250,
+    "isBundle": true,
+    "quantity": "5g × 10",
     "image": ["/beet-buzz/beet-buzz-1.png"],
     "Nutrition": {
       "Calories": "60 kcal",

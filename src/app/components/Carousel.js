@@ -6,9 +6,9 @@ import Autoplay from "embla-carousel-autoplay";
 import Image from "next/image";
 
 const carouselImages = [
-  "/carousel/banner-1.png",
-  "/carousel/banner-2.png",
   "/carousel/banner-3.png",
+  "/carousel/banner-2.png",
+  "/carousel/banner-1.png",
   "/carousel/banner-4.png",
 ];
 
@@ -33,7 +33,8 @@ export default function HeroCarousel() {
 
   useEffect(() => {
     if (!emblaApi) return;
-    onSelect(); 
+    
+    // Removed the synchronous onSelect() call to fix react-hooks/set-state-in-effect
     emblaApi.on("select", onSelect);
     emblaApi.on("reInit", onSelect);
 
